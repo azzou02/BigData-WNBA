@@ -4,6 +4,7 @@
 # from stats.wnba.com via the nba_api library. No API key required.
 # ──────────────────────────────────────────────────────────────────────────────
 
+import os
 import time
 import requests
 import pandas as pd
@@ -17,6 +18,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s | %(levelname)s | %(message)s'
 )
+logger = logging.getLogger(__name__)
 import config
 import helpers
 
