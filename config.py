@@ -6,14 +6,14 @@
 import os
 
 # ── Season settings ────────────────────────────────────────────────────────────
-SEASONS       = ['2018', '2019', '2020', '2021', '2022', '2023', '2024']
+SEASONS       = [str(s) for s in range(1997, 2025)]
 TARGET_SEASON = '2024'        # used for single-season charts & previews
 
 # ── API settings ───────────────────────────────────────────────────────────────
 WNBA_LEAGUE_ID = '10'
-REQUEST_PAUSE  = 4.0   # seconds between nba_api calls (be polite)
-REQUEST_TIMEOUT = 90
-REQUEST_RETRIES = 4
+REQUEST_PAUSE  = 1.0   # seconds between nba_api calls (be polite)
+REQUEST_TIMEOUT = 60
+REQUEST_RETRIES = 5
 
 NBA_HEADERS = {
     'Host': 'stats.nba.com',
@@ -28,13 +28,14 @@ NBA_HEADERS = {
 }
 
 # ── Local directory layout ─────────────────────────────────────────────────────
-BASE_DIR      = os.getenv('WNBA_BASE_DIR', 'wnba_pipeline_data')
+BASE_DIR      = os.getenv('WNBA_BASE_DIR', 'wnba_pipeline_ultra_massive')
 RAW_DIR       = os.path.join(BASE_DIR, 'data', 'raw')
+GAMES_CACHE   = os.path.join(RAW_DIR, 'games_cache') 
 PROCESSED_DIR = os.path.join(BASE_DIR, 'data', 'processed')
 AGG_DIR       = os.path.join(BASE_DIR, 'data', 'aggregated')
 OUTPUT_DIR    = os.path.join(BASE_DIR, 'analytics', 'output')
 
-LOCAL_DIRS = [RAW_DIR, PROCESSED_DIR, AGG_DIR, OUTPUT_DIR]
+LOCAL_DIRS = [RAW_DIR, GAMES_CACHE, PROCESSED_DIR, AGG_DIR, OUTPUT_DIR]
 
 # ── AWS S3 settings ────────────────────────────────────────────────────────────
 # Set USE_S3=True to write all outputs to S3 instead of (or in addition to)
